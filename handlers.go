@@ -8,7 +8,7 @@ import (
     "path/filepath"
 )
 
-func helloHandler(w http.ResponseWriter, r *http.Request) {
+func staticHandler(w http.ResponseWriter, r *http.Request) {
     // handles static html-s for the predefined paths
     fileToServe := staticPages[r.URL.Path]
     contents, err := ioutil.ReadFile(filepath.Join(staticDir, fileToServe))
