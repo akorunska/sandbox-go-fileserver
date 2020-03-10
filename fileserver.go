@@ -7,7 +7,6 @@ import (
 
 
 func main() {
-    http.HandleFunc("/", staticHandler)
-    http.HandleFunc("/files", filesHandler)
+    http.HandleFunc("/", responseHandler)
     log.Fatal(http.ListenAndServe(port, nil))
 }
