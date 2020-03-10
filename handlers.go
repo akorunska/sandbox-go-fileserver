@@ -44,7 +44,10 @@ func filesHandler(w http.ResponseWriter, r *http.Request, fileToWrite string) {
       if err != nil {
         http.Error(w, err.Error(), 500)
       }
-      writeFile(output.Contents, fileToWrite)
+      err = writeFile(output.Contents, fileToWrite)
+      if err != nil {
+        http.Error(w, err.Error(), 500)
+      }
       w.WriteHeader(200)
     default:
       fmt.Fprintf(w, "method not recognised")
@@ -53,7 +56,7 @@ func filesHandler(w http.ResponseWriter, r *http.Request, fileToWrite string) {
 
 func responseHandler(w http.ResponseWriter, r *http.Request) {
   if strings.HasPrefix(r.URL.Path, fileStoragePrefix) {
-    filesHandler(w, r, r.URL.Path)
+    filesHandler(w, r, strings.TrimPrefix(r.URL.Path, "/"))
     return
   }
 
