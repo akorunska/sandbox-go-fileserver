@@ -18,3 +18,14 @@ func staticHandler(w http.ResponseWriter, r *http.Request) {
     }
     fmt.Fprintf(w, string(contents))
 }
+
+func filesHandler(w http.ResponseWriter, r *http.Request) {
+    switch r.Method {
+    case http.MethodGet:
+       fmt.Fprintf(w, "get method")
+    case http.MethodPost:
+        fmt.Fprintf(w, "post method")
+    default:
+        fmt.Fprintf(w, "method not recognised")
+    }
+}
