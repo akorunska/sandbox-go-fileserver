@@ -35,20 +35,33 @@ func parseFileContentFromResponce(r *http.Request) (FileContent, error) {
   return fileContent, nil
 }
 
-func filesHandler(w http.ResponseWriter, r *http.Request, fileToWrite string) {
+func postFile(w http.ResponseWriter, r *http.Request, fileToWrite string) {
+  output, err := parseFileContentFromResponce(r)
+  if err != nil {
+    http.Error(w, err.Error(), 500)
+  }
+  err = writeFile(output.Contents, fileToWrite)
+  if err != nil {
+    http.Error(w, err.Error(), 500)
+  }
+  w.WriteHeader(200)
+}
+
+func getFile(w http.ResponseWriter, r *http.Request, filename string) {
+  contents, err := readFile(filename);
+  if err != nil {
+    http.Error(w, err.Error(), 500)
+  }
+  w.WriteHeader(200)
+  fmt.Fprintf(w, contents)
+}
+
+func filesHandler(w http.ResponseWriter, r *http.Request, filename string) {
   switch r.Method {
     case http.MethodGet:
-      fmt.Fprintf(w, "post method")
+      getFile(w, r, filename)
     case http.MethodPost:
-      output, err := parseFileContentFromResponce(r)
-      if err != nil {
-        http.Error(w, err.Error(), 500)
-      }
-      err = writeFile(output.Contents, fileToWrite)
-      if err != nil {
-        http.Error(w, err.Error(), 500)
-      }
-      w.WriteHeader(200)
+      postFile(w, r, filename)
     default:
       fmt.Fprintf(w, "method not recognised")
   }
