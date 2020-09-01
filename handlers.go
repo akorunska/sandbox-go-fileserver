@@ -35,6 +35,10 @@ func parseFileContentFromResponce(r *http.Request) (FileContent, error) {
   return fileContent, nil
 }
 
+func patchFile(w http.ResponseWriter, r *http.Request, fileToWrite string) {
+  // todo
+}
+
 func postFile(w http.ResponseWriter, r *http.Request, fileToWrite string) {
   output, err := parseFileContentFromResponce(r)
   if err != nil {
@@ -62,12 +66,16 @@ func filesHandler(w http.ResponseWriter, r *http.Request, filename string) {
       getFile(w, r, filename)
     case http.MethodPost:
       postFile(w, r, filename)
+    case http.MethodPatch:
+      patchFile(w, r, filename)
     default:
       fmt.Fprintf(w, "method not recognised")
   }
 }
 
 func responseHandler(w http.ResponseWriter, r *http.Request) {
+  // todo check basic authorization
+
   if strings.HasPrefix(r.URL.Path, fileStoragePrefix) {
     filesHandler(w, r, strings.TrimPrefix(r.URL.Path, "/"))
     return

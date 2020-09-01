@@ -28,5 +28,8 @@ func writeFile(contents string, filepath string) (error) {
 }
 
 func readFile(filepath string) (string, error) {
+    // todo implement file reading
     return "got file", nil
 }
+
+// todo handle patch requests that would lead to file contents updation
