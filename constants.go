@@ -5,6 +5,6 @@ const staticDir = "static"
 const fileStoragePrefix = "/files"
 
 var staticPages = map[string]string{
-	"/": "hello.html",
-	"/test/test": "test.html",
+    "/": "hello.html",
+    "/test/test": "test.html",
 }

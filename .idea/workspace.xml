@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -21,7 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="02e322ef-3c6b-42be-8585-350f952710f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/filesManipulation.go" beforeDir="false" afterPath="$PROJECT_DIR$/filesManipulation.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants.go" beforeDir="false" afterPath="$PROJECT_DIR$/constants.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,6 +51,7 @@
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Sybase" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
@@ -66,5 +70,15 @@
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="449" y="156" width="1022" height="734" key="SettingsEditor" timestamp="1604080464965">
+      <screen x="0" y="27" width="1920" height="988" />
+    </state>
+    <state x="449" y="156" width="1022" height="734" key="SettingsEditor/0.27.1920.988@0.27.1920.988" timestamp="1604080464965" />
+    <state x="623" y="243" width="672" height="678" key="search.everywhere.popup" timestamp="1604080442646">
+      <screen x="0" y="27" width="1920" height="988" />
+    </state>
+    <state x="623" y="243" width="672" height="678" key="search.everywhere.popup/0.27.1920.988@0.27.1920.988" timestamp="1604080442646" />
   </component>
 </project>
