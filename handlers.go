@@ -82,6 +82,11 @@ func getFile(w http.ResponseWriter, r *http.Request, filename string) {
 }
 
 func filesHandler(w http.ResponseWriter, r *http.Request, filename string) {
+    // check basic auth, since all file routes are private
+    if !checkBasicAuth(w, r) {
+        return
+    }
+
     switch r.Method {
         case http.MethodGet:
             getFile(w, r, filename)
@@ -95,8 +100,6 @@ func filesHandler(w http.ResponseWriter, r *http.Request, filename string) {
 }
 
 func responseHandler(w http.ResponseWriter, r *http.Request) {
-    // check basic auth
-    // TODO
 
     if strings.HasPrefix(r.URL.Path, fileStoragePrefix) {
         filesHandler(w, r, strings.TrimPrefix(r.URL.Path, "/"))
