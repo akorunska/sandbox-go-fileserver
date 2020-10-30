@@ -2,8 +2,16 @@ package main
 
 import (
     "fmt"
+    "io/ioutil"
     "os"
 )
+
+func fileExists(filepath string) (bool) {
+    if _, err := os.Stat(filepath); err == nil {
+        return true
+    }
+    return false
+}
 
 func writeFile(contents string, filepath string) (error) {
     // todo check if such file already exists
@@ -29,7 +37,9 @@ func writeFile(contents string, filepath string) (error) {
 
 func readFile(filepath string) (string, error) {
     // todo implement file reading
-    return "got file", nil
+    content, err := ioutil.ReadFile(filepath)
+
+    return string(content), err
 }
 
 // todo handle patch requests that would lead to file contents updation

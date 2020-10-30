@@ -36,25 +36,50 @@ func parseFileContentFromResponce(r *http.Request) (FileContent, error) {
 }
 
 func patchFile(w http.ResponseWriter, r *http.Request, fileToWrite string) {
-  // todo
+  output, err := parseFileContentFromResponce(r)
+  if err != nil {
+    http.Error(w, err.Error(), 500)
+    return
+  }
+  if !fileExists(fileToWrite) {
+    http.Error(w, "file does not exist", 400)
+    return
+  }
+  err = writeFile(output.Contents, fileToWrite)
+  if err != nil {
+    http.Error(w, err.Error(), 500)
+    return
+  }
+  w.WriteHeader(200)
 }
 
 func postFile(w http.ResponseWriter, r *http.Request, fileToWrite string) {
   output, err := parseFileContentFromResponce(r)
   if err != nil {
     http.Error(w, err.Error(), 500)
+    return
+  }
+  if fileExists(fileToWrite) {
+    http.Error(w, "file already exists", 400)
+    return
   }
   err = writeFile(output.Contents, fileToWrite)
   if err != nil {
     http.Error(w, err.Error(), 500)
+    return
   }
   w.WriteHeader(200)
 }
 
 func getFile(w http.ResponseWriter, r *http.Request, filename string) {
-  contents, err := readFile(filename);
+  if !fileExists(filename) {
+    http.Error(w, "file does not exist", 400)
+    return
+  }
+  contents, err := readFile(filename)
   if err != nil {
     http.Error(w, err.Error(), 500)
+    return
   }
   w.WriteHeader(200)
   fmt.Fprintf(w, contents)
