@@ -13,8 +13,9 @@ func fileExists(filepath string) (bool) {
     return false
 }
 
+// file exists and read file assume that reading / writing is safe and file existence was checked by the handler
+
 func writeFile(contents string, filepath string) (error) {
-    // todo check if such file already exists
     f, err := os.Create(filepath)
     fmt.Print(err, "\n\n")
     if err != nil {
@@ -36,10 +37,8 @@ func writeFile(contents string, filepath string) (error) {
 }
 
 func readFile(filepath string) (string, error) {
-    // todo implement file reading
     content, err := ioutil.ReadFile(filepath)
 
     return string(content), err
 }
 
-// todo handle patch requests that would lead to file contents updation

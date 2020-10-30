@@ -14,7 +14,7 @@ type FileContent struct {
   Contents string  `json:"contents"`
 }
 
-func parseFileContentFromResponce(r *http.Request) (FileContent, error) {
+func parseFileContentFromResponse(r *http.Request) (FileContent, error) {
   fileContent := FileContent{}
 
   b, err := ioutil.ReadAll(r.Body)
@@ -28,15 +28,11 @@ func parseFileContentFromResponce(r *http.Request) (FileContent, error) {
     return FileContent{}, err 
   }
 
-  // output, err := json.Marshal(fileContent)
-  // if err != nil {
-  //   return nil, err 
-  // }
   return fileContent, nil
 }
 
 func patchFile(w http.ResponseWriter, r *http.Request, fileToWrite string) {
-  output, err := parseFileContentFromResponce(r)
+  output, err := parseFileContentFromResponse(r)
   if err != nil {
     http.Error(w, err.Error(), 500)
     return
@@ -54,7 +50,7 @@ func patchFile(w http.ResponseWriter, r *http.Request, fileToWrite string) {
 }
 
 func postFile(w http.ResponseWriter, r *http.Request, fileToWrite string) {
-  output, err := parseFileContentFromResponce(r)
+  output, err := parseFileContentFromResponse(r)
   if err != nil {
     http.Error(w, err.Error(), 500)
     return
@@ -110,7 +106,7 @@ func responseHandler(w http.ResponseWriter, r *http.Request) {
   fileToServe := staticPages[r.URL.Path]
   contents, err := ioutil.ReadFile(filepath.Join(staticDir, fileToServe))
   if err != nil {
-      log.Printf("Unable to serve %s\n", r.URL.Path)
+      log.Printf("unable to serve %s\n", r.URL.Path)
       return
   }
   fmt.Fprintf(w, string(contents))
